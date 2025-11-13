@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Game</title>
+</head>
+<body>
+    <h1>Color Game</h1>
+    <label for="Coloroption">Select a color from the dropdown menu: </label>
+    <select name="Coloroption" id="Coloroption" onchange="checkcolor(this)">
+        <option value="" disabled selected>Choose a color</option>
+        <option id="Option1" value="Option1">Color1</option>
+        <option id="Option2" value="Option2">Color2</option>
+        <option id="Option3" value="Option3">Color3</option>
+        <option id="Option4" value="Option4">Color4</option>
+        <option id="Option5" value="Option5">Color5</option>
+    </select>
+    <p id ="GabrielGOATdefender" style="color: white;">Modric>KDB</p>
+    <label for="">Click here to restart game: </label>
+    <button onclick="refreshpage()">Click me to restart game</button>
+    <script>
+        function refreshpage(){
+            location.reload()
+        }
+        function generatecolor(){
+            var r=Math.floor(Math.random()*255);
+            var g=Math.floor(Math.random()*255);
+            var b=Math.floor(Math.random()*255);
+            return "rgb("+r+", "+g+", "+b+")";
+        }
+        var listofcolor=[];
+        for(var i=1;i<=5; i++){
+            var color=generatecolor();
+            var o=document.getElementById(`Option${i}`);
+            o.style.backgroundColor=color;
+            listofcolor.push(color);
+        }
+        var randomcolor = listofcolor[Math.floor(Math.random()*5)];
+        // alert(randomcolor);
+        var result=document.getElementById("GabrielGOATdefender");
+        var win="no";
+        function checkcolor(obj){
+            if (win=="no"){
+                var select_option=obj.options[obj.selectedIndex];
+                var select_color=window.getComputedStyle(select_option,null).getPropertyValue("background-color");
+                result.style.backgroundColor=select_color;
+                if (select_color==randomcolor){
+                    result.innerHTML="CONGRATS MY FELLOW ARSENAL FAN!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+                    win="yes";
+                }
+                else{
+                    result.innerHTML="YOU HAVE BEEN DEMOTED TO BOTTLEHAM BOTTLESPUR FAN STATUS, TRY AGAIN TO GET TO ARSENAL FAN STATUS!"; 
+                }
+            }
+            else{
+                result.innerHTML="SINCE, YOU DIDN'T USE YOUR BRAIN YOU HAVE BEEN DEMOTED TO BOTTLEHAM BOTTLESPUR STATUS, TRY AGAIN WITH THE RESTART BUTTON TO REACH ARSENAL STATUS"; 
+            }
+        }
+    </script>
+</body>
+</html>
